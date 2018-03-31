@@ -28,3 +28,9 @@
     void initializeBoard(disk board[SIZE][SIZE]);
 
     void printBoard(disk board [SIZE][SIZE]);
+
+    int validMove(disk played, disk board[SIZE][SIZE]);
+
+    int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]);
+
+
