@@ -1,10 +1,10 @@
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "disksAndPlayers.h"
 
 
-int main()
+int main(void)
 {
     // Variables declaration
 
@@ -19,9 +19,10 @@ int main()
     printBoard(board);
 
     //method to get user input
+    bool finished = false;  //  Boolean Value to repeat game until over
+    int playerGo = 0;       //  Who's Go is it (playerGomod2)
 
-    //invoke a method that implements the game logic
-    validMove(/*variable type disk of player's move*/,board); //validMove will check if move player entered was valid. If valid it returns 0. If not it returns 1.
-    //invoke a method that prints the final result
-
+    //  Repeats game untill finished
+    while(!finished)
+        movePlayer(playerGo++, player1, player2, board);
 }

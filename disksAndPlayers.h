@@ -1,4 +1,3 @@
-
     #define SIZE 8
 
     enum colour{
@@ -23,7 +22,7 @@
         int points;
     } player;
 
-    void initializePlayers(player player1, player player2);
+    void initializePlayers(player player1, player player2)
 
     void initializeBoard(disk board[SIZE][SIZE]);
 
@@ -33,4 +32,4 @@
 
     int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]);
 
-
+    void movePlayer(int playerGo, player player1, player player2, disk board[SIZE][SIZE]);
