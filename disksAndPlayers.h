@@ -3,7 +3,8 @@
     enum colour{
         WHITE,
         BLACK,
-        NONE
+        NONE,
+        VALID
     };
 
     typedef struct position{
@@ -32,4 +33,6 @@
 
     int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]);
 
-    void movePlayer(int playerGo, player player1, player player2, disk board[SIZE][SIZE]);
+    bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][SIZE]);
+
+    int findValidMove(player player1, disk board[SIZE][SIZE]);

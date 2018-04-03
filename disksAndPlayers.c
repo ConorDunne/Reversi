@@ -264,3 +264,49 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 }
 
 }
+
+bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][SIZE]); // Searches board for valid move
+{
+  //  Game Theory, APS (Like Nim)
+    if(playerGo%2 == 1)
+    {
+        printf("\n %c's go." player1.name);
+
+        int valid = findValidMove(player player1, disk board[SIZE][SIZE]);
+
+        if(valid == 0)
+          return false; //  Returns false if no valid move, ends game
+
+        printBoard(board);
+    }
+    else
+    {
+        printf("\n %c's go." player2.name);
+
+        int valid = findValidMove(player player1, disk board[SIZE][SIZE]);  // Searches board for valid move
+
+        if(valid == 0)
+          return false; //  Returns false if no valid move, ends game
+
+        printBoard(board);
+    }
+}
+
+int findValidMove(player player1, disk board[SIZE][SIZE])
+{
+  int val=0;  //  Changes to 1 if valid move found
+
+  for(int row=0; row<SIZE; row++)   //  Scans through rows
+  {
+    for(int col=0; col<SIZE; col++)   //  Scans through columns
+    {
+      if(validMove(disk played, disk board[SIZE][SIZE]) == 1)   // Valid Move Found
+      {
+        board[row][col].type = VALID;
+        val = 1;
+      }
+    }
+  }
+
+  return val;
+}
