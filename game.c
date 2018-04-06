@@ -176,7 +176,7 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][SIZE]) // Searches board for valid move
 {
   //  Game Theory, APS (Like Nim)
-    if(playerGo%2 == 1)
+    if(playerGo%2 == 0)
     {
         printf("\n %s's go.", player1.name);
 
@@ -193,12 +193,16 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
     {
         printf("\n %s's go.", player2.name);
 
-        int valid = findValidMove(player2, board);  // Searches board for valid move
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+        int valid = findValidMove(player2, board);
 
+        if(valid == 0)
+          return false; //  Returns false if no valid move, ends game
 
+        printBoard(board);
+
+        //  Make move
+    }
+}
 
 void initializePlayers(player player1, player player2){
     int nameSize;
@@ -288,15 +292,6 @@ void printBoard(disk board[SIZE][SIZE]){
         }
     }
 
-}
-
-        if(valid == 0)
-          return false; //  Returns false if no valid move, ends game
-
-        printBoard(board);
-
-        //  Make move
-    }
 }
 
 int findValidMove(player player1, disk board[SIZE][SIZE])
