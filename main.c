@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "disksAndPlayers.h"
-
+#include "board.h"
+#include "game.h"
 
 int main(void)
 {
