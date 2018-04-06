@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "board.h"
+
+#include "disksAndPlayers.h"
 
 
 void initializePlayers(player player1, player player2){

@@ -180,9 +180,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
     {
         printf("\n %s's go.", player1.name);
 
-
-//  Loop through board
-        int valid = findValidMove(played, board);
+        int valid = findValidMove(player1, board);
 
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
