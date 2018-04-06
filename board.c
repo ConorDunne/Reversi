@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "disksAndPlayers.h"
+#include "board.h"
 
 
 void initializePlayers(player player1, player player2){
