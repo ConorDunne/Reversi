@@ -4,7 +4,7 @@
 
 #include "board.h"
 
-
+int debug4; //remove
 void initializePlayers(player player1, player player2){
     int nameSize;
     // Insert player 1

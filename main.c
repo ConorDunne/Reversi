@@ -4,6 +4,8 @@
 #include "board.h"
 #include "game.h"
 
+int gitdebug2; //remove
+
 int main(void)
 {
     // Variables declaration

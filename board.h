@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #define SIZE 8
 
+int debug3; //remove
 enum colour{
     WHITE,
     BLACK,
