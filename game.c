@@ -3,6 +3,10 @@
 #include <string.h>
 #include "board.h"
 
+int gitDebug; // making a change to file to see if it's being uploaded to respository
+
+
+
 int validMove(disk played, disk board[SIZE][SIZE]) //checks if the move is valid. 1st checks your disk is next to opposite colour,
 {                                                  //then calls endsWithYourColour. Returns 0 if valid 1 if not.
    int x = played.pos.row;
