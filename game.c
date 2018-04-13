@@ -217,6 +217,8 @@ int findValidMove(player player1, disk board[SIZE][SIZE])
   {
     for(int col=0; col<SIZE; col++)   //  Scans through columns
     {
+      boardsquare.pos.row = row;
+      boardsquare.pos.col = col;
       if(validMove(player1, board) == 1)   // Valid Move Found
       {
         board[row][col].type = VALID;
