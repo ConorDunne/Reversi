@@ -45,6 +45,8 @@ void flipCounter(disk moveMade, player player1, player player2, disk board[SIZE]
 
 void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE],int xChange,int yChange);
 
+int returnAndFlip(disk moveMade, disk board[SIZE][SIZE], int xChange, int x, int yChange, int y);
+
 #endif // BOARD_H
 
 

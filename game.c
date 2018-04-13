@@ -271,18 +271,64 @@ void flipCounter(disk moveMade, player player1, player player2, disk board[SIZE]
     scanCounters(moveMade, player1, player2, board, 1, -1);
 }
 
-void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE],int xChange,int yChange)
+void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE], int xChange, int yChange)
 {
-    int y = moveMade.pos.row;
-    int x = moveMade.pos.col;
+    int y = moveMade.pos.row + yChange;
+    int x = moveMade.pos.col + xChange;
 
 
     int end = 0;
+    int points = 0;
     while((y>=0 && x>=0) && (y<=8 && x<=8) && end == 0)
     {
-        y += yChange;
+        if(moveMade.type == WHITE)
+        {
+            if(board[x][y].type == BLACK)
+            {
+                int points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
+                end = 1;
+            }
+            else if(board[x][y].type == NONE)
+                end = 0;
+        }
+        else if(moveMade.type == BLACK)
+        {
+            if(board[x][y].type == WHITE)
+            {
+                int points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
+                end = 1;
+            }
+            else if(board[x][y].type == NONE)
+                end = 0;
+        }
+
         x += xChange;
-
-
+        y += yChange;
     }
+}
+
+int returnAndFlip(disk moveMade, disk board[SIZE][SIZE], int xChange, int x, int yChange, int y)
+{
+    int point = 0;
+    int end = 0;
+
+    while(end == 0)
+    {
+        if(board[x][y].type == WHITE && moveMade.type == BLACK)
+        {
+            board[x][y].type == BLACK;
+            point++;
+        }
+        else if(board[x][y].type == BLACK && moveMade.type == WHITE)
+        {
+            board[x][y].type == WHITE;
+            point++;
+        }
+        else
+            end = 1;
+
+        x -= xChange;
+        y -= yChange;
+    }
+    return point;
 }
