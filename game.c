@@ -25,48 +25,47 @@ int validMove(disk played, disk board[SIZE][SIZE]) //checks if the move is valid
                switch(i) //checking what piece is next to the played piece
                {
                case 0:
-                 if(board[y-1][x].type == Oppositecolour) //checking north of played piece
+                 if(board[x][y-1].type == Oppositecolour && ((x>=0)&&(y >0)&&(x<=7)&&(y<=7))) //checking north of played piece
                    if(endsWithYourColour(played,i,board) == 0)
                      return 0;
 
                   break;
                case 1:
-                  if(board[y-1][x+1].type == Oppositecolour)  //checking north east
+                  if(board[x+1][y-1].type == Oppositecolour &&((x>=0)&&(y>0)&&(x<7)&&(y<=7)))  //checking north east
                    if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 2:
-                  if(board[y][x+1].type == Oppositecolour) //east
+                  if(board[x+1][y].type == Oppositecolour && ((x>=0)&&(y>=0)&&(x<7)&&(y<=7))) //east
                    if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 3:
-                  if(board[y+1][x+1].type == Oppositecolour) //south east
+                  if(board[x+1][y+1].type == Oppositecolour && ((x>=0)&&(y>=0)&&(x<7)&&(y<7))) //south east
                    if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 4:
-                  if(board[y+1][x].type == Oppositecolour) //south
+                  if(board[x][y+1].type == Oppositecolour && ((x>=0)&&(y>=0)&&(x<=7)&&(y<7))) //south
                     if(endsWithYourColour(played,i,board) == 0)
                        return 0;
                   break;
                case 5:
-                  if(board[y+1][x-1].type == Oppositecolour) // south west
+                  if(board[x-1][y+1].type == Oppositecolour &&((x>0)&&(y>=0)&&(x<=7)&&(y<7))) // south west
                   if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 6:
-                  if(board[y][x-1].type == Oppositecolour)// west
+                  if(board[x-1][y].type == Oppositecolour &&((x>0)&&(y>=0)&&(x<=7)&&(y<=7)))// west
                   if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 7:
-                  if(board[y-1][x-1].type == Oppositecolour) // north west
+                  if(board[x-1][y-1].type == Oppositecolour && ((x>0)&&(y>0)&&(x<=7)&&(y<=7))) // north west
                   if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                default :
-                  printf("\n\aInvaild move\n");
                   return 1;
                }
 
@@ -86,9 +85,9 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
  switch(i) //checking what piece is next to the played piece
 {
    case 0:
-      while(currentSpace != played.type && (x&&y >= 0 && x&&y <= 7)) //as long as piece is an oppoiste colour and itsn't the edge of the board
+      while(currentSpace != played.type && ((x>= 0) && (y > 0) && (x<=7) && (y <= 7))) //as long as piece is an oppoiste colour and itsn't the edge of the board
          {
-            currentSpace = board[y-1][x].type; //checking straight ahead
+            currentSpace = board[x][y-1].type; //checking straight ahead
             if(currentSpace == played.type) //if straight line is ended with same colour token
                return 0;
             y--; //moving in the straight line
@@ -96,9 +95,9 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
       break;
    case 1:
-       while(currentSpace != played.type && (x&&y >= 0 && x&&y <= 7)) //keeping going until hits opposite colour and it isn't the edge of th board
+       while(currentSpace != played.type && ((x>=0) && (y > 0) && (x<7) && (y <= 7))) //keeping going until hits opposite colour and it isn't the edge of th board
          {
-            currentSpace = board[y-1][x+1].type; //checking north east
+            currentSpace = board[x+1][y-1].type; //checking north east
             if(currentSpace == played.type) //if straight line is ended with the same colour token
                return 0;
             y--; //moving in straight line
@@ -107,9 +106,9 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
       break;
    case 2:
-       while(currentSpace != played.type && (x&&y >= 0 && x&&y <= 7))
+       while(currentSpace != played.type && ((x>= 0) && (y >= 0) && (x<7) && (y <= 7)))
          {
-            currentSpace = board[y][x+1].type; //checking east
+            currentSpace = board[x+1][y].type; //checking east
             if(currentSpace == played.type)
             return 0;
             x++;
@@ -117,9 +116,9 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
       break;
    case 3:
-       while(currentSpace != played.type && (x&&y >= 0 && x&&y <= 7))
+       while(currentSpace != played.type && ((x>= 0) && (y >= 0) && (x<7) && (y <7)))
          {
-            currentSpace = board[y+1][x+1].type; //south east
+            currentSpace = board[x+1][y+1].type; //south east
             if(currentSpace == played.type)
                return 0;
             y++;
@@ -128,9 +127,9 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
       break;
    case 4:
-       while(currentSpace != played.type && (x&&y >= 0 && x&&y <= 7))
+       while(currentSpace != played.type && ((x>= 0) && (y >= 0) && (x<=7) && (y < 7)))
          {
-            currentSpace = board[y+1][x].type; //south
+            currentSpace = board[x][y+1].type; //south
             if(currentSpace == played.type)
                return 0;
             y++;
@@ -138,9 +137,9 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
       break;
    case 5:
-       while(currentSpace != played.type && (x&&y >= 0 && x&&y <= 7))
+       while(currentSpace != played.type && ((x> 0) && (y >= 0) && (x<=7) && (y < 7)))
          {
-            currentSpace = board[y+1][x-1].type; //south west
+            currentSpace = board[x-1][y+1].type; //south west
             if(currentSpace == played.type)
                return 0;
             y++;
@@ -149,9 +148,9 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
       break;
    case 6:
-       while(currentSpace != played.type && (x&&y >= 0 && x&&y <= 7))
+       while(currentSpace != played.type && ((x> 0) && (y >= 0) && (x<=7) && (y <= 7)))
          {
-            currentSpace = board[y][x-1].type; //west
+            currentSpace = board[x-1][y].type; //west
             if(currentSpace == played.type)
                return 0;
             x--;
@@ -159,9 +158,9 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
       break;
    case 7:
-       while(currentSpace != played.type && (x&&y >= 0 && x&&y <= 7))
+       while(currentSpace != played.type &&((x> 0) && (y > 0) && (x<=7) && (y <= 7)))
          {
-            currentSpace = board[y-1][x-1].type; //north west
+            currentSpace = board[x-1][y-1].type; //north west
             if(currentSpace == played.type)
                return 0;
             y--;
@@ -170,9 +169,8 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
       break;
    default :
-      printf("\n\aInvaild move\n");
       return 1;
-      break;
+
 }
 
 }
@@ -189,7 +187,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
 
-        printBoard(board);
+      printBoard(board);
 
         //  Make move
         disk moveMade;
@@ -217,7 +215,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
 
-        printBoard(board);
+      printBoard(board);
 
         //  Make move
         disk moveMade;
@@ -250,7 +248,7 @@ int findValidMove(player player1, disk board[SIZE][SIZE])
       boardsquare.pos.row = row;
       boardsquare.pos.col = col;
       boardsquare.type = board[row][col].type;
-      if(validMove(boardsquare, board) == 1)   // Valid Move Found
+      if(validMove(boardsquare, board) == 0)   // Valid Move Found
       {
         board[row][col].type = VALID;
         val = 1;

@@ -87,6 +87,8 @@ void printBoard(disk board[SIZE][SIZE]){
                 case NONE:
                     printf("x | ");
                     break;
+                case VALID:
+                  printf("A | ");
                 default:
                     break;
             }
