@@ -193,7 +193,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
 
         //  Make move
         disk moveMade;
-        moveMade.colour = player1.colour;
+        moveMade.type = player1.type;
 
         int check = 1;
         while(check == 1)
@@ -221,7 +221,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
 
         //  Make move
         disk moveMade;
-        moveMade.colour = player2.colour;
+        moveMade.type = player2.type;
 
         int check = 1;
         while(check == 1)
@@ -249,7 +249,8 @@ int findValidMove(player player1, disk board[SIZE][SIZE])
     {
       boardsquare.pos.row = row;
       boardsquare.pos.col = col;
-      if(validMove(player1, board) == 1)   // Valid Move Found
+      boardsquare.type = board[row][col].type;
+      if(validMove(boardsquare, board) == 1)   // Valid Move Found
       {
         board[row][col].type = VALID;
         val = 1;
@@ -272,7 +273,7 @@ void flipCounter(disk moveMade, player player1, player player2, disk board[SIZE]
     scanCounters(moveMade, player1, player2, board, 1, -1);
 }
 
-void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE], xChange, yChange)
+void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE],int xChange,int yChange)
 {
     int y = moveMade.pos.row;
     int x = moveMade.pos.col;

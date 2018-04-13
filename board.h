@@ -43,7 +43,7 @@ int findValidMove(player player1, disk board[SIZE][SIZE]);
 
 void flipCounter(disk moveMade, player player1, player player2, disk board[SIZE][SIZE]);
 
-void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE], xChange, yChange);
+void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE],int xChange,int yChange);
 
 #endif // BOARD_H
 
