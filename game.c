@@ -3,7 +3,7 @@
 #include <string.h>
 #include "board.h"
 
-int gitDebug; // making a change to file to see if it's being uploaded to respository
+
 
 
 
@@ -211,6 +211,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
 int findValidMove(player player1, disk board[SIZE][SIZE])
 {
   int val=0;  //  Changes to 1 if valid move found
+  disk boardsquare;
 
   for(int row=0; row<SIZE; row++)   //  Scans through rows
   {
