@@ -15,7 +15,7 @@ int validMove(disk played, disk board[SIZE][SIZE]) //checks if the move is valid
 
    if(played.type == WHITE)
       Oppositecolour = BLACK;
-   else
+   else if (played.type == BLACK)
       Oppositecolour = WHITE;
 
    for(int i = 0; i < 9; i++) //to check all directions surrounding played piece
@@ -25,43 +25,43 @@ int validMove(disk played, disk board[SIZE][SIZE]) //checks if the move is valid
                switch(i) //checking what piece is next to the played piece
                {
                case 0:
-                 if(board[x][y-1].type == Oppositecolour && ((x>=0)&&(y >0)&&(x<=7)&&(y<=7))) //checking north of played piece
+                 if((board[x][y-1].type == Oppositecolour) && ((x>=0)&&(y >0)&&(x<=7)&&(y<=7))) //checking north of played piece
                    if(endsWithYourColour(played,i,board) == 0)
                      return 0;
 
                   break;
                case 1:
-                  if(board[x+1][y-1].type == Oppositecolour &&((x>=0)&&(y>0)&&(x<7)&&(y<=7)))  //checking north east
+                  if((board[x+1][y-1].type == Oppositecolour) &&((x>=0)&&(y>0)&&(x<7)&&(y<=7)))  //checking north east
                    if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 2:
-                  if(board[x+1][y].type == Oppositecolour && ((x>=0)&&(y>=0)&&(x<7)&&(y<=7))) //east
+                  if((board[x+1][y].type == Oppositecolour) && ((x>=0)&&(y>=0)&&(x<7)&&(y<=7))) //east
                    if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 3:
-                  if(board[x+1][y+1].type == Oppositecolour && ((x>=0)&&(y>=0)&&(x<7)&&(y<7))) //south east
+                  if((board[x+1][y+1].type == Oppositecolour) && ((x>=0)&&(y>=0)&&(x<7)&&(y<7))) //south east
                    if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 4:
-                  if(board[x][y+1].type == Oppositecolour && ((x>=0)&&(y>=0)&&(x<=7)&&(y<7))) //south
+                  if((board[x][y+1].type == Oppositecolour) && ((x>=0)&&(y>=0)&&(x<=7)&&(y<7))) //south
                     if(endsWithYourColour(played,i,board) == 0)
                        return 0;
                   break;
                case 5:
-                  if(board[x-1][y+1].type == Oppositecolour &&((x>0)&&(y>=0)&&(x<=7)&&(y<7))) // south west
+                  if((board[x-1][y+1].type == Oppositecolour) &&((x>0)&&(y>=0)&&(x<=7)&&(y<7))) // south west
                   if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 6:
-                  if(board[x-1][y].type == Oppositecolour &&((x>0)&&(y>=0)&&(x<=7)&&(y<=7)))// west
+                  if((board[x-1][y].type == Oppositecolour) &&((x>0)&&(y>=0)&&(x<=7)&&(y<=7)))// west
                   if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
                case 7:
-                  if(board[x-1][y-1].type == Oppositecolour && ((x>0)&&(y>0)&&(x<=7)&&(y<=7))) // north west
+                  if((board[x-1][y-1].type == Oppositecolour) && ((x>0)&&(y>0)&&(x<=7)&&(y<=7))) // north west
                   if(endsWithYourColour(played,i,board) == 0)
                      return 0;
                   break;
@@ -192,6 +192,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         //  Make move
         disk moveMade;
         moveMade.type = player1.type;
+        disk boardsquare;
 
         int check = 1;
         while(check == 1)
@@ -240,15 +241,17 @@ int findValidMove(player player1, disk board[SIZE][SIZE])
 {
   int val=0;  //  Changes to 1 if valid move found
   disk boardsquare;
+  disk currentsquare;
 
+  currentsquare.type = player1.type;
   for(int row=0; row<SIZE; row++)   //  Scans through rows
   {
     for(int col=0; col<SIZE; col++)   //  Scans through columns
     {
-      boardsquare.pos.row = row;
-      boardsquare.pos.col = col;
+      currentsquare.pos.row = row;
+      currentsquare.pos.col = col;
       boardsquare.type = board[row][col].type;
-      if(validMove(boardsquare, board) == 0)   // Valid Move Found
+      if(validMove(currentsquare, board) == 0)   // Valid Move Found
       {
         board[row][col].type = VALID;
         val = 1;
