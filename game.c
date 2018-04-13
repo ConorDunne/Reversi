@@ -192,6 +192,21 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         printBoard(board);
 
         //  Make move
+        disk moveMade;
+        moveMade.colour = player1.colour;
+
+        int check = 1;
+        while(check == 1)
+        {
+            printf(" Insert move (x y): ");
+                scanf("%d %d", &moveMade.pos.row, &moveMade.pos.col);
+
+               check = validMove(moveMade, board);
+            if(check == 1)
+                printf("\n\n ERROR: Invalid move");
+        }
+
+        void flipCounter(moveMade, player1, player2, board);
     }
     else
     {
@@ -205,6 +220,21 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         printBoard(board);
 
         //  Make move
+        disk moveMade;
+        moveMade.colour = player2.colour;
+
+        int check = 1;
+        while(check == 1)
+        {
+            printf(" Insert move (x y): ");
+                scanf("%d %d", &moveMade.pos.row, &moveMade.pos.col);
+
+               check = validMove(moveMade, board);
+            if(check == 1)
+                printf("\n\n ERROR: Invalid move");
+        }
+
+        void flipCounter(moveMade, player2, player1, board);
     }
 }
 
@@ -228,4 +258,32 @@ int findValidMove(player player1, disk board[SIZE][SIZE])
   }
 
   return val;
+}
+
+void flipCounter(disk moveMade, player player1, player player2, disk board[SIZE][SIZE])
+{
+    scanCounters(moveMade, player1, player2, board, 1, 0);
+    scanCounters(moveMade, player1, player2, board, 1, 1);
+    scanCounters(moveMade, player1, player2, board, 0, 1);
+    scanCounters(moveMade, player1, player2, board, -1, 1);
+    scanCounters(moveMade, player1, player2, board, -1, 0);
+    scanCounters(moveMade, player1, player2, board, -1, -1);
+    scanCounters(moveMade, player1, player2, board, 0, -1);
+    scanCounters(moveMade, player1, player2, board, 1, -1);
+}
+
+void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE], xChange, yChange)
+{
+    int y = moveMade.pos.row;
+    int x = moveMade.pos.col;
+
+
+    int end = 0;
+    while((y>=0 && x>=0) && (y<=8 && x<=8) && end == 0)
+    {
+        y += yChange;
+        x += xChange;
+
+
+    }
 }
