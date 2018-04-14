@@ -208,7 +208,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
             }
         }
 
-        flipCounter(moveMade, player1, player2, board);
+        flipCounter(moveMade, &player1, &player2, board);
 
         //  Remove Valid Move Disks
         for(int r=0; r<8; r++)
@@ -248,7 +248,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         }
 
 
-        flipCounter(moveMade, player2, player1, board);
+        flipCounter(moveMade, &player2, &player1, board);
         //  Remove Valid Move Disks
         for(int r=0; r<8; r++)
         {
@@ -287,19 +287,19 @@ int findValidMove(player player1, disk board[SIZE][SIZE])
   return val;
 }
 
-void flipCounter(disk moveMade, player player1, player player2, disk board[SIZE][SIZE])
+void flipCounter(disk moveMade, player *player1, player *player2, disk board[SIZE][SIZE])
 {
-    scanCounters(moveMade, player1, player2, board, 1, 0);
-    scanCounters(moveMade, player1, player2, board, 1, 1);
-    scanCounters(moveMade, player1, player2, board, 0, 1);
-    scanCounters(moveMade, player1, player2, board, -1, 1);
-    scanCounters(moveMade, player1, player2, board, -1, 0);
-    scanCounters(moveMade, player1, player2, board, -1, -1);
-    scanCounters(moveMade, player1, player2, board, 0, -1);
-    scanCounters(moveMade, player1, player2, board, 1, -1);
+    scanCounters(moveMade, &player1, &player2, board, 1, 0); //south
+    scanCounters(moveMade, &player1, &player2, board, 1, 1); //south east
+    scanCounters(moveMade, &player1, &player2, board, 0, 1); //east
+    scanCounters(moveMade, &player1, &player2, board, -1, 1); //north east
+    scanCounters(moveMade, &player1, &player2, board, -1, 0); //north
+    scanCounters(moveMade, &player1, &player2, board, -1, -1); //north west
+    scanCounters(moveMade, &player1, &player2, board, 0, -1); //west
+    scanCounters(moveMade, &player1, &player2, board, 1, -1); //south west
 }
 
-void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE], int xChange, int yChange)
+void scanCounters(disk moveMade, player *player1, player *player2, disk board[SIZE][SIZE], int xChange, int yChange)
 {
     int y = moveMade.pos.col + yChange;
     int x = moveMade.pos.row + xChange;
@@ -307,13 +307,15 @@ void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE
 
     int end = 0;
     int points = 0;
-    while((y>=0 && x>=0) && (y<=8 && x<=8) && end == 0)
+    while((y>=0 && x>=0) && (y<=7 && x<=7) && end == 0)
     {
+
         if(moveMade.type == WHITE)
         {
             if(board[x][y].type == WHITE)
             {
-                int points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
+                points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
+                player2->points += points;
                 end = 1;
             }
             else if(board[x][y].type == NONE)
@@ -321,9 +323,11 @@ void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE
         }
         else if(moveMade.type == BLACK)
         {
+
             if(board[x][y].type == BLACK)
             {
-                int points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
+                points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
+                player1->points += points;
                 end = 1;
             }
             else if(board[x][y].type == NONE)
@@ -340,16 +344,20 @@ int returnAndFlip(disk moveMade, disk board[SIZE][SIZE], int xChange, int x, int
     int point = 0;
     int end = 0;
 
+    int colSelected = moveMade.pos.col;
+    int rowSelected = moveMade.pos.row;
     while(end == 0)
     {
         if(board[x][y].type == WHITE && moveMade.type == BLACK)
         {
-            board[x][y].type == BLACK;
+            board[rowSelected][colSelected].type = BLACK;
+            board[x][y].type = BLACK;
             point++;
         }
         else if(board[x][y].type == BLACK && moveMade.type == WHITE)
         {
-            board[x][y].type == WHITE;
+            board[rowSelected][colSelected].type = WHITE;
+            board[x][y].type = WHITE;
             point++;
         }
         else

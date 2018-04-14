@@ -4,9 +4,6 @@
 #include "board.h"
 
 
-
-int gitdebug2; //remove
-
 int main(void)
 {
     // Variables declaration
