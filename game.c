@@ -201,11 +201,12 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
                 scanf("%d %d", &moveMade.pos.row, &moveMade.pos.col);
 
                check = validMove(moveMade, board);
-            if(check == 1)
-                printf("\n\n ERROR: Invalid move");
+            if(check == 1) {
+              printf("\n\n ERROR: Invalid move");
+            }
         }
 
-        void flipCounter(moveMade, player1, player2, board);
+        flipCounter(moveMade, player1, player2, board);
     }
     else
     {
@@ -233,7 +234,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
                 printf("\n\n ERROR: Invalid move");
         }
 
-        void flipCounter(moveMade, player2, player1, board);
+        flipCounter(moveMade, player2, player1, board);
     }
 }
 

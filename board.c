@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "board.h"
 
-int debug4; //remove
+
 void initializePlayers(player player1, player player2){
     int nameSize;
     // Insert player 1

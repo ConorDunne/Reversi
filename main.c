@@ -4,14 +4,15 @@
 #include "board.h"
 
 
+
 int gitdebug2; //remove
 
 int main(void)
 {
     // Variables declaration
+player player1= {"player1", BLACK,0};
+player player2= {"player2", WHITE,0};
 
-    player player1= {"player1", BLACK,0};
-    player player2= {"player2", WHITE,0};
     disk board[SIZE][SIZE];
 
     initializePlayers(player1, player2);
