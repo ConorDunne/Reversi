@@ -15,7 +15,7 @@ player player2= {"player2", WHITE,0};
 
     disk board[SIZE][SIZE];
 
-    initializePlayers(player1, player2);
+    initializePlayers(&player1, &player2);
 
     initializeBoard(board);
 

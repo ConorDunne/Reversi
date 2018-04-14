@@ -4,27 +4,30 @@
 #include "board.h"
 
 
-void initializePlayers(player player1, player player2){
+void initializePlayers(player *player1, player *player2){
     int nameSize;
+    char tempName[20];
     // Insert player 1
     printf("Player 1 please insert your name:   \n");
-    fgets(player1.name, 20, stdin);
-    nameSize = strlen(player1.name);
-    player1.name[nameSize -1] = '/0';
+    fgets(player1->name, 20, stdin);
+    nameSize = strlen(player1->name);
+    player1->name[nameSize -1] = '\0';
+
 
     // Assign colours and points to player 1
-    player1.type = BLACK;
-    player1.points = 2;
+    player1->type = BLACK;
+    player1->points = 2;
 
     // Insert player 2
     printf("Player 2 please insert your name:   \n");
-    fgets(player2.name, 20, stdin);
-    nameSize = strlen(player2.name);
-    player2.name[nameSize -1] = '/0';
+    fgets(player2->name, 20, stdin);
+    nameSize = strlen(player2->name);
+    player2->name[nameSize -1] = '\0';
+
 
     // Assign colours and points to player 2
-    player2.type = WHITE;
-    player2.points = 2;
+    player2->type = WHITE;
+    player2->points = 2;
 
 }
 
