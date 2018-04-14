@@ -199,6 +199,8 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         {
             printf(" Insert move (x y): ");
                 scanf("%d %d", &moveMade.pos.row, &moveMade.pos.col);
+                moveMade.pos.row -= 1;
+                moveMade.pos.col -= 1;
 
                check = validMove(moveMade, board);
             if(check == 1) {
@@ -207,6 +209,17 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         }
 
         flipCounter(moveMade, player1, player2, board);
+
+        //  Remove Valid Move Disks
+        for(int r=0; r<8; r++)
+        {
+            for(int c=0; c<8; c++)
+            {
+                if(board[r][c].type == VALID)
+                    board[r][c].type = NONE;
+            }
+        }
+
     }
     else
     {
@@ -234,7 +247,18 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
                 printf("\n\n ERROR: Invalid move");
         }
 
+
         flipCounter(moveMade, player2, player1, board);
+        //  Remove Valid Move Disks
+        for(int r=0; r<8; r++)
+        {
+            for(int c=0; c<8; c++)
+            {
+                if(board[r][c].type == VALID)
+                    board[r][c].type = NONE;
+            }
+        }
+
     }
 }
 
@@ -277,8 +301,8 @@ void flipCounter(disk moveMade, player player1, player player2, disk board[SIZE]
 
 void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE][SIZE], int xChange, int yChange)
 {
-    int y = moveMade.pos.row + yChange;
-    int x = moveMade.pos.col + xChange;
+    int y = moveMade.pos.col + yChange;
+    int x = moveMade.pos.row + xChange;
 
 
     int end = 0;
@@ -287,7 +311,7 @@ void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE
     {
         if(moveMade.type == WHITE)
         {
-            if(board[x][y].type == BLACK)
+            if(board[x][y].type == WHITE)
             {
                 int points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
                 end = 1;
@@ -297,7 +321,7 @@ void scanCounters(disk moveMade, player player1, player player2, disk board[SIZE
         }
         else if(moveMade.type == BLACK)
         {
-            if(board[x][y].type == WHITE)
+            if(board[x][y].type == BLACK)
             {
                 int points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
                 end = 1;
