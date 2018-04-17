@@ -240,7 +240,10 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         while(check == 1)
         {
             printf(" Insert move (x y): ");
-                scanf("%d %d", &moveMade.pos.row, &moveMade.pos.col);
+            scanf("%d %d", &moveMade.pos.row, &moveMade.pos.col);
+
+            moveMade.pos.row -= 1;
+            moveMade.pos.col -= 1;
 
                check = validMove(moveMade, board);
             if(check == 1)
