@@ -23,6 +23,6 @@ player player2= {"player2", WHITE,0};
     int playerGo = 0;       //  Who's Go is it (playerGomod2)
 
     //  Repeats game untill finished
-    while( playerGo < 5)
-        movePlayer(playerGo++, player1, player2, board);
+    while( (playerGo < 64) || !finished)
+        finished = movePlayer(playerGo++, player1, player2, board);
 }

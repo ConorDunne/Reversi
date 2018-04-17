@@ -198,7 +198,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         while(check == 1)
         {
             printf(" Insert move (x y): ");
-                scanf("%d %d", &moveMade.pos.row, &moveMade.pos.col);
+                scanf("%d%*c%d", &moveMade.pos.row, &moveMade.pos.col); //the %*c is a way to stop scanf reading in characters. e.g if someone typed 3,4 the , would be discouted
                 moveMade.pos.row -= 1;
                 moveMade.pos.col -= 1;
 
@@ -240,7 +240,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         while(check == 1)
         {
             printf(" Insert move (x y): ");
-            scanf("%d %d", &moveMade.pos.row, &moveMade.pos.col);
+            scanf("%d%*c%d", &moveMade.pos.row, &moveMade.pos.col);
 
             moveMade.pos.row -= 1;
             moveMade.pos.col -= 1;
