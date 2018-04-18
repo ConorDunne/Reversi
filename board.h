@@ -37,7 +37,7 @@ int validMove(disk played, disk board[SIZE][SIZE]);
 
 int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]);
 
-bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][SIZE]);
+bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE][SIZE]);
 
 int findValidMove(player player1, disk board[SIZE][SIZE]);
 

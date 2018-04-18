@@ -175,14 +175,14 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
 }
 
-bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][SIZE]) // Searches board for valid move
+bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE][SIZE]) // Searches board for valid move
 {
   //  Game Theory, APS (Like Nim)
     if(playerGo%2 == 0)
     {
-        printf("\n %s's go.", player1.name);
+        printf("\n %s's go.", player1->name);
 
-        int valid = findValidMove(player1, board);
+        int valid = findValidMove(*player1, board);
 
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
@@ -191,7 +191,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
 
         //  Make move
         disk moveMade;
-        moveMade.type = player1.type;
+        moveMade.type = player1->type;
         disk boardsquare;
 
         int check = 1;
@@ -208,7 +208,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
             }
         }
 
-        flipCounter(moveMade, &player1, &player2, board);
+        flipCounter(moveMade, player1, player2, board);
 
         //  Remove Valid Move Disks
         for(int r=0; r<8; r++)
@@ -223,9 +223,9 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
     }
     else
     {
-        printf("\n %s's go.", player2.name);
+        printf("\n %s's go.", player2->name);
 
-        int valid = findValidMove(player2, board);
+        int valid = findValidMove(*player2, board);
 
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
@@ -234,7 +234,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
 
         //  Make move
         disk moveMade;
-        moveMade.type = player2.type;
+        moveMade.type = player2->type;
 
         int check = 1;
         while(check == 1)
@@ -251,7 +251,7 @@ bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][S
         }
 
 
-        flipCounter(moveMade, &player2, &player1, board);
+        flipCounter(moveMade, player1, player2, board);
         //  Remove Valid Move Disks
         for(int r=0; r<8; r++)
         {
@@ -292,14 +292,14 @@ int findValidMove(player player1, disk board[SIZE][SIZE])
 
 void flipCounter(disk moveMade, player *player1, player *player2, disk board[SIZE][SIZE])
 {
-    scanCounters(moveMade, &player1, &player2, board, 1, 0); //south
-    scanCounters(moveMade, &player1, &player2, board, 1, 1); //south east
-    scanCounters(moveMade, &player1, &player2, board, 0, 1); //east
-    scanCounters(moveMade, &player1, &player2, board, -1, 1); //north east
-    scanCounters(moveMade, &player1, &player2, board, -1, 0); //north
-    scanCounters(moveMade, &player1, &player2, board, -1, -1); //north west
-    scanCounters(moveMade, &player1, &player2, board, 0, -1); //west
-    scanCounters(moveMade, &player1, &player2, board, 1, -1); //south west
+    scanCounters(moveMade, player1, player2, board, 1, 0); //south
+    scanCounters(moveMade, player1, player2, board, 1, 1); //south east
+    scanCounters(moveMade, player1, player2, board, 0, 1); //east
+    scanCounters(moveMade, player1, player2, board, -1, 1); //north east
+    scanCounters(moveMade, player1, player2, board, -1, 0); //north
+    scanCounters(moveMade, player1, player2, board, -1, -1); //north west
+    scanCounters(moveMade, player1, player2, board, 0, -1); //west
+    scanCounters(moveMade, player1, player2, board, 1, -1); //south west
 }
 
 void scanCounters(disk moveMade, player *player1, player *player2, disk board[SIZE][SIZE], int xChange, int yChange)

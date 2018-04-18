@@ -7,8 +7,8 @@
 int main(void)
 {
     // Variables declaration
-player player1= {"player1", BLACK,0};
-player player2= {"player2", WHITE,0};
+player player1= {"player1", NONE,0};
+player player2= {"player2", NONE,0};
 
     disk board[SIZE][SIZE];
 
@@ -23,6 +23,24 @@ player player2= {"player2", WHITE,0};
     int playerGo = 0;       //  Who's Go is it (playerGomod2)
 
     //  Repeats game untill finished
-    while( (playerGo < 64) || !finished)
-        finished = movePlayer(playerGo++, player1, player2, board);
+    while( (playerGo < 4) && !finished)
+        finished = movePlayer(playerGo++, &player1, &player2, board);
+
+if(player1.points > player2.points)
+   {
+      printf("Congratulations %s. You are the winner! \n",player1.name);
+
+   }
+
+else if(player1.points < player2.points)
+{
+   printf("Congratualtions %s. you are the winner!\n",player2.name);
 }
+
+else
+   printf("DRAW!");
+
+}
+
+
+
