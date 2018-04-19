@@ -197,7 +197,7 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
         int check = 1;
         while(check == 1)
         {
-            printf(" Insert move (x y): ");
+            printf("\n\n\t Insert move (x y): ");
                 scanf("%d%*c%d", &moveMade.pos.col, &moveMade.pos.row); //the %*c is a way to stop scanf reading in characters. e.g if someone typed 3,4 the , would be discouted
                 moveMade.pos.row -= 1;
                 moveMade.pos.col -= 1;
@@ -208,8 +208,6 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
             }
         }
 
-        flipCounter(moveMade, player1, player2, board);
-
         //  Remove Valid Move Disks
         for(int r=0; r<8; r++)
         {
@@ -219,6 +217,9 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
                     board[r][c].type = NONE;
             }
         }
+
+        player1->points++;
+        flipCounter(moveMade, player1, player2, board);
 
     }
     else
@@ -240,7 +241,7 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
         int check = 1;
         while(check == 1)
         {
-            printf(" Insert move (x y): ");
+            printf("\n\n\t Insert move (x y): ");
                 scanf("%d%*c%d", &moveMade.pos.col, &moveMade.pos.row); //the %*c is a way to stop scanf reading in characters. e.g if someone typed 3,4 the , would be discouted
                 moveMade.pos.row -= 1;
                 moveMade.pos.col -= 1;
@@ -251,8 +252,6 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
             }
         }
 
-        flipCounter(moveMade, player2, player1, board);
-
         //  Remove Valid Move Disks
         for(int r=0; r<8; r++)
         {
@@ -262,6 +261,9 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
                     board[r][c].type = NONE;
             }
         }
+
+        player2->points++;
+        flipCounter(moveMade, player1, player2, board);
 
     }
 }
@@ -320,6 +322,7 @@ void scanCounters(disk moveMade, player *player1, player *player2, disk board[SI
             {
                 points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
                 player2->points += points;
+                player1->points -= points;
                 end = 1;
             }
             else if(board[x][y].type == NONE)
@@ -332,6 +335,7 @@ void scanCounters(disk moveMade, player *player1, player *player2, disk board[SI
             {
                 points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
                 player1->points += points;
+                player2->points -= points;
                 end = 1;
             }
             else if(board[x][y].type == NONE)
