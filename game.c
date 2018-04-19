@@ -175,30 +175,30 @@ int endsWithYourColour(disk played, int i, disk board[SIZE][SIZE]) //checks that
 
 }
 
-bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE][SIZE]) // Searches board for valid move
+bool movePlayer(int playerGo, player player1, player player2, disk board[SIZE][SIZE]) // Searches board for valid move
 {
   //  Game Theory, APS (Like Nim)
     if(playerGo%2 == 0)
     {
-        printf("\n %s's go.", player1->name);
+        printf("\n %s's go.", player1.name);
 
-        int valid = findValidMove(*player1, board);
+        int valid = findValidMove(player1, board);
 
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
 
-      printBoard(board);
+        printBoard(board);
 
         //  Make move
         disk moveMade;
-        moveMade.type = player1->type;
+        moveMade.type = player1.type;
         disk boardsquare;
 
         int check = 1;
         while(check == 1)
         {
             printf(" Insert move (x y): ");
-                scanf("%d%*c%d", &moveMade.pos.row, &moveMade.pos.col); //the %*c is a way to stop scanf reading in characters. e.g if someone typed 3,4 the , would be discouted
+                scanf("%d %d", &moveMade.pos.col, &moveMade.pos.row);
                 moveMade.pos.row -= 1;
                 moveMade.pos.col -= 1;
 
@@ -208,7 +208,7 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
             }
         }
 
-        flipCounter(moveMade, player1, player2, board);
+        flipCounter(moveMade, &player1, &player2, board);
 
         //  Remove Valid Move Disks
         for(int r=0; r<8; r++)
@@ -223,35 +223,36 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
     }
     else
     {
-        printf("\n %s's go.", player2->name);
+       printf("\n %s's go.", player2.name);
 
-        int valid = findValidMove(*player2, board);
+        int valid = findValidMove(player2, board);
 
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
 
-      printBoard(board);
+        printBoard(board);
 
         //  Make move
         disk moveMade;
-        moveMade.type = player2->type;
+        moveMade.type = player2.type;
+        disk boardsquare;
 
         int check = 1;
         while(check == 1)
         {
             printf(" Insert move (x y): ");
-            scanf("%d%*c%d", &moveMade.pos.row, &moveMade.pos.col);
-
-            moveMade.pos.row -= 1;
-            moveMade.pos.col -= 1;
+                scanf("%d %d", &moveMade.pos.col, &moveMade.pos.row);
+                moveMade.pos.row -= 1;
+                moveMade.pos.col -= 1;
 
                check = validMove(moveMade, board);
-            if(check == 1)
-                printf("\n\n ERROR: Invalid move");
+            if(check == 1) {
+              printf("\n\n ERROR: Invalid move");
+            }
         }
 
+        flipCounter(moveMade, &player2, &player1, board);
 
-        flipCounter(moveMade, player1, player2, board);
         //  Remove Valid Move Disks
         for(int r=0; r<8; r++)
         {
@@ -261,6 +262,7 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
                     board[r][c].type = NONE;
             }
         }
+
 
     }
 }
