@@ -187,7 +187,7 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
 
-      printBoard(board);
+      printBoard(player1, player2, board);
 
         //  Make move
         disk moveMade;
@@ -230,7 +230,7 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
 
-      printBoard(board);
+      printBoard(player1, player2, board);
 
         //  Make move
         disk moveMade;

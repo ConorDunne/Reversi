@@ -16,7 +16,7 @@ player player2= {"player2", NONE,0};
 
     initializeBoard(board);
 
-    printBoard(board);
+    printBoard(&player1, &player2, board);
 
     //method to get user input
     bool finished = false;  //  Boolean Value to repeat game until over

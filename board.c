@@ -68,7 +68,7 @@ void initializeBoard(disk board [SIZE][SIZE]){
     }
 
 
-void printBoard(disk board[SIZE][SIZE]){
+void printBoard(player *player1, player *player2, disk board[SIZE][SIZE]){
     int i,j;
     j = 0;
 
@@ -97,4 +97,6 @@ void printBoard(disk board[SIZE][SIZE]){
         }
     }
 
+    printf(" %s: %d", player1->name, player1->points);
+    printf(" %s: %d", player2->name, player2->points);
 }
