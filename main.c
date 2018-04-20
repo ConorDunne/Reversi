@@ -23,7 +23,7 @@ player player2= {"player2", NONE,0};
     int playerGo = 0;       //  Who's Go is it (playerGomod2)
 
     //  Repeats game untill finished
-    while( (playerGo < 4) && !finished)
+    while( (playerGo < 64) && !finished)
         finished = movePlayer(playerGo++, &player1, &player2, board);
 
 if(player1.points > player2.points)

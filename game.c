@@ -282,7 +282,7 @@ int findValidMove(player player1, disk board[SIZE][SIZE])
       currentsquare.pos.row = row;
       currentsquare.pos.col = col;
       boardsquare.type = board[row][col].type;
-      if(validMove(currentsquare, board) == 0)   // Valid Move Found
+      if((validMove(currentsquare, board) == 0) && (boardsquare.type == NONE))   // Valid Move Found
       {
         board[row][col].type = VALID;
         val = 1;

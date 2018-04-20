@@ -97,6 +97,6 @@ void printBoard(player *player1, player *player2, disk board[SIZE][SIZE]){
         }
     }
 
-    printf(" %s: %d", player1->name, player1->points);
-    printf(" %s: %d", player2->name, player2->points);
+    printf("\n\t %s: %d", player1->name, player1->points);
+    printf("\n\t %s: %d", player2->name, player2->points);
 }
