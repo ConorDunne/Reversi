@@ -40,7 +40,10 @@ else if(player1.points < player2.points)
 else
    printf("DRAW!");
 
+   saveBoard(board, player1, player2);
 }
+
+
 
 
 

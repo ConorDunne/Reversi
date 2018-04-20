@@ -100,3 +100,41 @@ void printBoard(player *player1, player *player2, disk board[SIZE][SIZE]){
     printf("\n\t %s: %d", player1->name, player1->points);
     printf("\n\t %s: %d", player2->name, player2->points);
 }
+
+void saveBoard(disk board[SIZE][SIZE], player player1, player player2)
+{
+    FILE *fp;
+
+    if((fp = fopen("result.txt", "a")) == NULL)
+        puts(" ERROR: Cannot Open File");
+    else
+    {
+        int i,j;
+        j = 0;
+
+        fprintf(fp, "\n    ");
+        for(i=0; i< SIZE; i++){
+            fprintf(fp, "%d   ",i+1);
+        }
+        for(i=0; i< SIZE; i++){
+            fprintf(fp, "\n%d | ", i+1);
+            for(j=0;j<SIZE; j++){
+                switch(board[i][j].type){
+                    case BLACK:
+                        fprintf(fp, "1 | ");
+                        break;
+                    case WHITE:
+                        fprintf(fp, "0 | ");
+                        break;
+                    case NONE:
+                        fprintf(fp, "x | ");
+                        break;
+                    case VALID:
+                      fprintf(fp, "A | ");
+                    default:
+                        break;
+                }
+            }
+    }
+}
+}
