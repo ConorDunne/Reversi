@@ -18,7 +18,7 @@ int validMove(disk played, disk board[SIZE][SIZE]) //checks if the move is valid
    else if (played.type == BLACK)
       Oppositecolour = WHITE;
 
-   for(int i = 0; i < 8; i++) //to check all directions surrounding played piece
+   for(int i = 0; i < 9; i++) //to check all directions surrounding played piece
       {
          if( ((x >= 0) && (y >= 0)) && ((x<= 7) && (y <= 7)) ) //if the piece is within the board
             {
@@ -182,83 +182,30 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
     {
         printf("\n %s's go.", player1->name);
 
-//  Checks if Valid Move Available
         int valid = findValidMove(*player1, board);
 
         if(valid == 0)
           return false; //  Returns false if no valid move, ends game
 
-        printBoard(player1, player2, board);
+      printBoard(player1, player2, board);
 
-//  Make move
+        //  Make move
         disk moveMade;
         moveMade.type = player1->type;
         disk boardsquare;
 
-//  Check for user to enter valid move
         int check = 1;
         while(check == 1)
         {
             printf("\n\n\t Insert move (x y): ");
                 scanf("%d%*c%d", &moveMade.pos.col, &moveMade.pos.row); //the %*c is a way to stop scanf reading in characters. e.g if someone typed 3,4 the , would be discouted
-                moveMade.pos.row -= 1;  //  -1 to change board co-ordinant to array co-ordinant
-                moveMade.pos.col -= 1;  //  -1 to change board co-ordinant to array co-ordinant
+                moveMade.pos.row -= 1;
+                moveMade.pos.col -= 1;
 
-//  Check if User Entered Valid Move=
-            if(board[moveMade.pos.row][moveMade.pos.col] != VALID)
-                printf("\n\n ERROR: Invalid move");
-            else
-                check = 0;
-        }
-
-//  Remove Valid Move Disks
-        for(int r=0; r<8; r++)
-        {
-            for(int c=0; c<8; c++)
-            {
-                if(board[r][c].type == VALID)
-                    board[r][c].type = NONE;
+               check = validMove(moveMade, board);
+            if(check == 1) {
+              printf("\n\n ERROR: Invalid move");
             }
-        }
-
-//  Add one point for counter placed
-        player1->points++;
-//  Flip relevant counters
-        flipCounter(moveMade, player1, player2, board);
-
-    }
-    else
-    {
-        printf("\n %s's go.", player2->name);
-
-//  Checks if Valid Move available
-        int valid = findValidMove(*player2, board);
-
-        if(valid == 0)
-          return false; //  Returns false if no valid move, ends game
-
-        printBoard(player1, player2, board);
-
-//  Make move
-        disk moveMade;
-        moveMade.type = player2->type;
-        disk boardsquare;
-
-//  Check for user to enter a valid move
-        int check = 1;
-        while(check == 1)
-        {
-            printf("\n\n\t Insert move (x y): ");
-                scanf("%d%*c%d", &moveMade.pos.col, &moveMade.pos.row); //the %*c is a way to stop scanf reading in characters. e.g if someone typed 3,4 the , would be discouted
-                moveMade.pos.row -= 1;  //  -1 to change board co-ordinant to array co-ordinant
-                moveMade.pos.col -= 1;  //  -1 to change board co-ordinant to array co-ordinant
-
-//  Check if User Entered Valid Move=
-            if(board[moveMade.pos.row][moveMade.pos.col] != VALID)
-                printf("\n\n ERROR: Invalid move");
-            else
-                check = 0;
-        }
         }
 
         //  Remove Valid Move Disks
@@ -271,9 +218,51 @@ bool movePlayer(int playerGo, player *player1, player *player2, disk board[SIZE]
             }
         }
 
-//  Add one point for counter placed
+        player1->points++;
+        flipCounter(moveMade, player1, player2, board);
+
+    }
+    else
+    {
+        printf("\n %s's go.", player2->name);
+
+        int valid = findValidMove(*player2, board);
+
+        if(valid == 0)
+          return false; //  Returns false if no valid move, ends game
+
+      printBoard(player1, player2, board);
+
+        //  Make move
+        disk moveMade;
+        moveMade.type = player2->type;
+        disk boardsquare;
+
+        int check = 1;
+        while(check == 1)
+        {
+            printf("\n\n\t Insert move (x y): ");
+                scanf("%d%*c%d", &moveMade.pos.col, &moveMade.pos.row); //the %*c is a way to stop scanf reading in characters. e.g if someone typed 3,4 the , would be discouted
+                moveMade.pos.row -= 1;
+                moveMade.pos.col -= 1;
+
+               check = validMove(moveMade, board);
+            if(check == 1) {
+              printf("\n\n ERROR: Invalid move");
+            }
+        }
+
+        //  Remove Valid Move Disks
+        for(int r=0; r<8; r++)
+        {
+            for(int c=0; c<8; c++)
+            {
+                if(board[r][c].type == VALID)
+                    board[r][c].type = NONE;
+            }
+        }
+
         player2->points++;
-//  Flip relevant counters
         flipCounter(moveMade, player1, player2, board);
 
     }
@@ -321,43 +310,38 @@ void scanCounters(disk moveMade, player *player1, player *player2, disk board[SI
     int y = moveMade.pos.col + yChange;
     int x = moveMade.pos.row + xChange;
 
-//  Check along line if counters are to flip
+
     int end = 0;
     int points = 0;
     while((y>=0 && x>=0) && (y<=7 && x<=7) && end == 0)
     {
-//  Player 2
+
         if(moveMade.type == WHITE)
         {
-//  Moves to end of flipping line
             if(board[x][y].type == WHITE)
             {
                 points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
-                player2->points += points;  //  Increases flipped points
-                player1->points -= points;  //  Decreased flipped points
+                player2->points += points;
+                player1->points -= points;
                 end = 1;
             }
-//  Line doesn't end with white counter, no flips
             else if(board[x][y].type == NONE)
                 end = 0;
         }
-//  Player 1
         else if(moveMade.type == BLACK)
         {
-//  Moves to end of flipping line
+
             if(board[x][y].type == BLACK)
             {
                 points = returnAndFlip(moveMade, board, xChange, (x - xChange), yChange, (y - yChange));
-                player1->points += points;  //  Increases flipped points
-                player2->points -= points;  //  Decreased flipped ponts
+                player1->points += points;
+                player2->points -= points;
                 end = 1;
             }
-//  Line doesn't end with black counter, no flips
             else if(board[x][y].type == NONE)
                 end = 0;
         }
 
-//  Move to next position in line
         x += xChange;
         y += yChange;
     }
@@ -372,14 +356,12 @@ int returnAndFlip(disk moveMade, disk board[SIZE][SIZE], int xChange, int x, int
     int rowSelected = moveMade.pos.row;
     while(end == 0)
     {
-//  Flips counter if of opposite colour (White -> Black)
         if(board[x][y].type == WHITE && moveMade.type == BLACK)
         {
             board[rowSelected][colSelected].type = BLACK;
             board[x][y].type = BLACK;
             point++;
         }
-//  Flips counter if of opposite colour (Black -> White)
         else if(board[x][y].type == BLACK && moveMade.type == WHITE)
         {
             board[rowSelected][colSelected].type = WHITE;
@@ -389,7 +371,6 @@ int returnAndFlip(disk moveMade, disk board[SIZE][SIZE], int xChange, int x, int
         else
             end = 1;
 
-//  Returns to places counter
         x -= xChange;
         y -= yChange;
     }

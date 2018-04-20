@@ -28,13 +28,13 @@ player player2= {"player2", NONE,0};
 
 if(player1.points > player2.points)
    {
-      printf("Congratulations %s. You are the winner,with %d points! \n",player1.name,player1.points);
+      printf("Congratulations %s. You are the winner! \n",player1.name);
 
    }
 
 else if(player1.points < player2.points)
 {
-   printf("Congratualtions %s. you are the winner, with %d points\n",player2.name,player2.points);
+   printf("Congratualtions %s. you are the winner!\n",player2.name);
 }
 
 else
